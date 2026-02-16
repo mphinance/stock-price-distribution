@@ -16,29 +16,37 @@
             --ocean-forest: #03734A;
         }
         body { background: radial-gradient(circle at top, var(--ocean-navy), var(--ocean-deep)); color: var(--ocean-light); font-family: 'Inter', sans-serif; min-height: 100vh; }
-        .header-panel { background-color: rgba(0,0,0,0.4); color: #fff; padding: 80px 0; margin-bottom: 60px; border-bottom: 1px solid rgba(176, 196, 217, 0.1); text-align: center; }
+        .header-panel { background-color: rgba(0,0,0,0.4); color: #fff; padding: 60px 0; margin-bottom: 40px; border-bottom: 1px solid rgba(176, 196, 217, 0.1); text-align: center; }
         .header-panel h1 { font-weight: 900; margin: 0; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 30px rgba(4, 216, 139, 0.3); }
-        .header-panel p { font-size: 1.3rem; color: var(--ocean-neon); opacity: 0.9; margin-top: 15px; font-family: monospace; }
+        .header-panel p { font-size: 1.1rem; color: var(--ocean-neon); opacity: 0.9; margin-top: 10px; font-family: monospace; }
         
-        .section-title { color: var(--ocean-neon); text-transform: uppercase; font-weight: 900; letter-spacing: 2px; margin-bottom: 30px; border-left: 5px solid var(--ocean-neon); padding-left: 15px; }
+        .section-title { color: var(--ocean-neon); text-transform: uppercase; font-weight: 900; letter-spacing: 2px; margin-bottom: 20px; border-left: 5px solid var(--ocean-neon); padding-left: 15px; }
         
-        .comparison-card { background: rgba(3, 88, 140, 0.1); border: 1px solid rgba(176, 196, 217, 0.1); border-radius: 16px; padding: 30px; margin-bottom: 60px; }
-        .comparison-table { width: 100%; color: var(--ocean-light); }
-        .comparison-table th { color: var(--ocean-neon); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
-        .comparison-table td { padding: 12px 5px; border-bottom: 1px solid rgba(176, 196, 217, 0.05); }
-        .comparison-table tr:hover { background: rgba(4, 216, 139, 0.05); }
+        .comparison-card { background: rgba(3, 88, 140, 0.1); border: 1px solid rgba(176, 196, 217, 0.1); border-radius: 16px; padding: 30px; margin-bottom: 60px; backdrop-filter: blur(10px); }
+        .comparison-table { width: 100%; color: var(--ocean-light); border-collapse: separate; border-spacing: 0 5px; }
+        .comparison-table th { color: var(--ocean-neon); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; padding: 15px 5px; }
+        .comparison-table td { padding: 15px 5px; border-top: 1px solid rgba(176, 196, 217, 0.05); border-bottom: 1px solid rgba(176, 196, 217, 0.05); }
+        .comparison-table tr { transition: all 0.3s ease; }
+        .comparison-table tr:hover { background: rgba(4, 216, 139, 0.1); cursor: pointer; }
+        
+        .ticker-link { 
+            color: #fff; 
+            font-weight: 900; 
+            font-size: 1.2rem; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+        .ticker-link:hover { color: var(--ocean-neon); }
+        .ticker-link i { font-size: 1rem; margin-left: 5px; opacity: 0.5; }
 
-        .card { background-color: rgba(3, 88, 140, 0.15); border: 1px solid rgba(176, 196, 217, 0.1); border-radius: 16px; backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--ocean-neon); background-color: rgba(3, 88, 140, 0.25); box-shadow: 0 15px 45px rgba(0,0,0,0.5); }
-        .card-title { color: #fff !important; font-weight: 800 !important; text-transform: uppercase; letter-spacing: 1px; }
-        .card-action { border-top: 1px solid rgba(176, 196, 217, 0.1) !important; background: transparent !important; }
-        .card-action a { color: var(--ocean-neon) !important; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
         .container { width: 95%; max-width: 1400px; }
-        .ticker-badge { background: linear-gradient(45deg, var(--ocean-neon), var(--ocean-forest)); color: #000; padding: 4px 12px; border-radius: 6px; font-weight: 900; font-size: 1rem; margin-bottom: 15px; display: inline-block; }
         .footer { padding: 80px 0; text-align: center; color: rgba(176, 196, 217, 0.2); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; }
         
         .val-high { color: #fd4600; font-weight: 800; }
-        .val-low { color: var(--ocean-neon); font-weight: 800; }
+        .val-stable { color: #4caf50; font-weight: 800; }
         .bias-up { color: #4caf50; font-weight: 800; }
         .bias-down { color: #ef5350; font-weight: 800; }
     </style>
@@ -47,474 +55,279 @@
     <div class="header-panel">
         <div class="container">
             <h1>ALPHA INTELLIGENCE</h1>
-            <p>> STRATEGY_DISTRIBUTION_DASHBOARD v1.3</p>
+            <p>> STRATEGY_DISTRIBUTION_DASHBOARD v1.4</p>
         </div>
     </div>
 
     <div class="container">
-        <!-- Comparison Pulse -->
-        <h4 class="section-title">Watchlist Alpha comparison</h4>
+        <h4 class="section-title">Market distribution Comparison</h4>
         <div class="comparison-card">
             <table class="comparison-table centered">
                 <thead>
                     <tr>
                         <th>Ticker</th>
                         <th>Extreme Volatility (%)</th>
+                        <th>Stability (Normal Range %)</th>
                         <th>Directional Bias (Up %)</th>
-                        <th>Avg Swing Delay</th>
-                        <th>Quiet frequency</th>
+                        <th>Quiet Frequency (%)</th>
                     </tr>
                 </thead>
                 <tbody>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">ACHR</td>
+                    <tr onclick="window.location.href='ACHR_report.html'">
+                        <td>
+                            <a href="ACHR_report.html" class="ticker-link">
+                                ACHR <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">6.6%</td>
+                        <td class="">43.2%</td>
                         <td class="bias-down">44.3%</td>
-                        <td>1 Days</td>
-                        <td class="">21.6%</td>
+                        <td>21.6%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">AMT</td>
+                    <tr onclick="window.location.href='AMT_report.html'">
+                        <td>
+                            <a href="AMT_report.html" class="ticker-link">
+                                AMT <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">0.0%</td>
+                        <td class="val-stable">89.9%</td>
                         <td class="bias-up">52.1%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">56.9%</td>
+                        <td>56.9%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">ASTS</td>
+                    <tr onclick="window.location.href='ASTS_report.html'">
+                        <td>
+                            <a href="ASTS_report.html" class="ticker-link">
+                                ASTS <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="val-high">12.6%</td>
+                        <td class="">39.2%</td>
                         <td class="">51.7%</td>
-                        <td>1 Days</td>
-                        <td class="">16.4%</td>
+                        <td>16.4%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">AVGO</td>
+                    <tr onclick="window.location.href='AVGO_report.html'">
+                        <td>
+                            <a href="AVGO_report.html" class="ticker-link">
+                                AVGO <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">2.0%</td>
+                        <td class="">67.7%</td>
                         <td class="bias-up">53.5%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">34.1%</td>
+                        <td>34.1%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">CLS</td>
+                    <tr onclick="window.location.href='CLS_report.html'">
+                        <td>
+                            <a href="CLS_report.html" class="ticker-link">
+                                CLS <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">3.0%</td>
+                        <td class="">50.4%</td>
                         <td class="bias-up">57.3%</td>
-                        <td>1 Days</td>
-                        <td class="">21.8%</td>
+                        <td>21.8%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">DDD</td>
+                    <tr onclick="window.location.href='DDD_report.html'">
+                        <td>
+                            <a href="DDD_report.html" class="ticker-link">
+                                DDD <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">6.8%</td>
+                        <td class="">45.6%</td>
                         <td class="bias-down">41.3%</td>
-                        <td>1 Days</td>
-                        <td class="">17.6%</td>
+                        <td>17.6%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">DNN</td>
+                    <tr onclick="window.location.href='DNN_report.html'">
+                        <td>
+                            <a href="DNN_report.html" class="ticker-link">
+                                DNN <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">2.2%</td>
+                        <td class="">52.6%</td>
                         <td class="bias-down">46.7%</td>
-                        <td>1 Days</td>
-                        <td class="">24.8%</td>
+                        <td>24.8%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">GLXY</td>
+                    <tr onclick="window.location.href='GLXY_report.html'">
+                        <td>
+                            <a href="GLXY_report.html" class="ticker-link">
+                                GLXY <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">7.4%</td>
+                        <td class="">34.8%</td>
                         <td class="bias-up">52.4%</td>
-                        <td>1 Days</td>
-                        <td class="">11.2%</td>
+                        <td>11.2%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">GOOGL</td>
+                    <tr onclick="window.location.href='GOOGL_report.html'">
+                        <td>
+                            <a href="GOOGL_report.html" class="ticker-link">
+                                GOOGL <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">0.2%</td>
+                        <td class="val-stable">86.5%</td>
                         <td class="bias-up">55.7%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">47.7%</td>
+                        <td>47.7%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">ISRG</td>
+                    <tr onclick="window.location.href='ISRG_report.html'">
+                        <td>
+                            <a href="ISRG_report.html" class="ticker-link">
+                                ISRG <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">0.6%</td>
+                        <td class="val-stable">88.5%</td>
                         <td class="">51.5%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">55.7%</td>
+                        <td>55.7%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">KTOS</td>
+                    <tr onclick="window.location.href='KTOS_report.html'">
+                        <td>
+                            <a href="KTOS_report.html" class="ticker-link">
+                                KTOS <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">1.6%</td>
+                        <td class="">64.3%</td>
                         <td class="bias-up">52.9%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">31.9%</td>
+                        <td>31.9%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">MU</td>
+                    <tr onclick="window.location.href='MU_report.html'">
+                        <td>
+                            <a href="MU_report.html" class="ticker-link">
+                                MU <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">2.6%</td>
+                        <td class="">54.3%</td>
                         <td class="bias-up">54.5%</td>
-                        <td>1 Days</td>
-                        <td class="">26.1%</td>
+                        <td>26.1%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">NFLX</td>
+                    <tr onclick="window.location.href='NFLX_report.html'">
+                        <td>
+                            <a href="NFLX_report.html" class="ticker-link">
+                                NFLX <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">0.4%</td>
+                        <td class="val-stable">85.7%</td>
                         <td class="">50.9%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">47.5%</td>
+                        <td>47.5%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">NVDA</td>
+                    <tr onclick="window.location.href='NVDA_report.html'">
+                        <td>
+                            <a href="NVDA_report.html" class="ticker-link">
+                                NVDA <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">1.0%</td>
+                        <td class="">63.5%</td>
                         <td class="bias-up">53.1%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">32.3%</td>
+                        <td>32.3%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">ONDS</td>
+                    <tr onclick="window.location.href='ONDS_report.html'">
+                        <td>
+                            <a href="ONDS_report.html" class="ticker-link">
+                                ONDS <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="val-high">16.6%</td>
+                        <td class="">27.8%</td>
                         <td class="bias-down">47.5%</td>
-                        <td>1 Days</td>
-                        <td class="">11.4%</td>
+                        <td>11.4%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">PTRN</td>
+                    <tr onclick="window.location.href='PTRN_report.html'">
+                        <td>
+                            <a href="PTRN_report.html" class="ticker-link">
+                                PTRN <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">9.9%</td>
+                        <td class="">50.5%</td>
                         <td class="bias-down">44.6%</td>
-                        <td>1 Days</td>
-                        <td class="">23.8%</td>
+                        <td>23.8%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">RKLB</td>
+                    <tr onclick="window.location.href='RKLB_report.html'">
+                        <td>
+                            <a href="RKLB_report.html" class="ticker-link">
+                                RKLB <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">6.6%</td>
+                        <td class="">46.6%</td>
                         <td class="bias-up">52.9%</td>
-                        <td>1 Days</td>
-                        <td class="">19.4%</td>
+                        <td>19.4%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">RR</td>
+                    <tr onclick="window.location.href='RR_report.html'">
+                        <td>
+                            <a href="RR_report.html" class="ticker-link">
+                                RR <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="val-high">17.8%</td>
+                        <td class="">29.8%</td>
                         <td class="bias-down">41.7%</td>
-                        <td>1 Days</td>
-                        <td class="">12.6%</td>
+                        <td>12.6%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">TER</td>
+                    <tr onclick="window.location.href='TER_report.html'">
+                        <td>
+                            <a href="TER_report.html" class="ticker-link">
+                                TER <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">2.0%</td>
+                        <td class="">69.1%</td>
                         <td class="bias-up">53.5%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">30.5%</td>
+                        <td>30.5%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">TSM</td>
+                    <tr onclick="window.location.href='TSM_report.html'">
+                        <td>
+                            <a href="TSM_report.html" class="ticker-link">
+                                TSM <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="">0.4%</td>
+                        <td class="">73.1%</td>
                         <td class="bias-up">53.5%</td>
-                        <td>1 Days</td>
-                        <td class="val-low">35.5%</td>
+                        <td>35.5%</td>
                     </tr>
                     
-                    <tr>
-                        <td style="font-weight: 900; color: #fff;">UAMY</td>
+                    <tr onclick="window.location.href='UAMY_report.html'">
+                        <td>
+                            <a href="UAMY_report.html" class="ticker-link">
+                                UAMY <i class="material-icons">open_in_new</i>
+                            </a>
+                        </td>
                         <td class="val-high">14.6%</td>
+                        <td class="">30.0%</td>
                         <td class="bias-down">46.1%</td>
-                        <td>1 Days</td>
-                        <td class="">17.4%</td>
+                        <td>17.4%</td>
                     </tr>
                     
                 </tbody>
             </table>
-        </div>
-
-        <h4 class="section-title">Individual reports</h4>
-        <div class="row">
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">ACHR</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for ACHR.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="ACHR_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">AMT</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for AMT.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="AMT_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">ASTS</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for ASTS.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="ASTS_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">AVGO</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for AVGO.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="AVGO_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">CLS</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for CLS.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="CLS_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">DDD</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for DDD.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="DDD_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">DNN</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for DNN.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="DNN_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">GLXY</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for GLXY.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="GLXY_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">GOOGL</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for GOOGL.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="GOOGL_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">ISRG</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for ISRG.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="ISRG_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">KTOS</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for KTOS.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="KTOS_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">MU</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for MU.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="MU_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">NFLX</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for NFLX.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="NFLX_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">NVDA</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for NVDA.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="NVDA_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">ONDS</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for ONDS.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="ONDS_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">PTRN</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for PTRN.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="PTRN_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">RKLB</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for RKLB.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="RKLB_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">RR</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for RR.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="RR_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">TER</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for TER.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="TER_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">TSM</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for TSM.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="TSM_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col s12 m6 l4 xl3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="ticker-badge">UAMY</div>
-                        <span class="card-title">Strategy Report</span>
-                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for UAMY.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="UAMY_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
-                    </div>
-                </div>
-            </div>
-            
         </div>
     </div>
 
