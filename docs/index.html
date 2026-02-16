@@ -19,6 +19,15 @@
         .header-panel { background-color: rgba(0,0,0,0.4); color: #fff; padding: 80px 0; margin-bottom: 60px; border-bottom: 1px solid rgba(176, 196, 217, 0.1); text-align: center; }
         .header-panel h1 { font-weight: 900; margin: 0; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 30px rgba(4, 216, 139, 0.3); }
         .header-panel p { font-size: 1.3rem; color: var(--ocean-neon); opacity: 0.9; margin-top: 15px; font-family: monospace; }
+        
+        .section-title { color: var(--ocean-neon); text-transform: uppercase; font-weight: 900; letter-spacing: 2px; margin-bottom: 30px; border-left: 5px solid var(--ocean-neon); padding-left: 15px; }
+        
+        .comparison-card { background: rgba(3, 88, 140, 0.1); border: 1px solid rgba(176, 196, 217, 0.1); border-radius: 16px; padding: 30px; margin-bottom: 60px; }
+        .comparison-table { width: 100%; color: var(--ocean-light); }
+        .comparison-table th { color: var(--ocean-neon); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .comparison-table td { padding: 12px 5px; border-bottom: 1px solid rgba(176, 196, 217, 0.05); }
+        .comparison-table tr:hover { background: rgba(4, 216, 139, 0.05); }
+
         .card { background-color: rgba(3, 88, 140, 0.15); border: 1px solid rgba(176, 196, 217, 0.1); border-radius: 16px; backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--ocean-neon); background-color: rgba(3, 88, 140, 0.25); box-shadow: 0 15px 45px rgba(0,0,0,0.5); }
         .card-title { color: #fff !important; font-weight: 800 !important; text-transform: uppercase; letter-spacing: 1px; }
@@ -27,17 +36,210 @@
         .container { width: 95%; max-width: 1400px; }
         .ticker-badge { background: linear-gradient(45deg, var(--ocean-neon), var(--ocean-forest)); color: #000; padding: 4px 12px; border-radius: 6px; font-weight: 900; font-size: 1rem; margin-bottom: 15px; display: inline-block; }
         .footer { padding: 80px 0; text-align: center; color: rgba(176, 196, 217, 0.2); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; }
+        
+        .val-high { color: #fd4600; font-weight: 800; }
+        .val-low { color: var(--ocean-neon); font-weight: 800; }
+        .bias-up { color: #4caf50; font-weight: 800; }
+        .bias-down { color: #ef5350; font-weight: 800; }
     </style>
 </head>
 <body>
     <div class="header-panel">
         <div class="container">
             <h1>ALPHA INTELLIGENCE</h1>
-            <p>> STRATEGY_DISTRIBUTION_DASHBOARD v1.2</p>
+            <p>> STRATEGY_DISTRIBUTION_DASHBOARD v1.3</p>
         </div>
     </div>
 
     <div class="container">
+        <!-- Comparison Pulse -->
+        <h4 class="section-title">Watchlist Alpha comparison</h4>
+        <div class="comparison-card">
+            <table class="comparison-table centered">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Extreme Volatility (%)</th>
+                        <th>Directional Bias (Up %)</th>
+                        <th>Avg Swing Delay</th>
+                        <th>Quiet frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">ACHR</td>
+                        <td class="">6.6%</td>
+                        <td class="bias-down">44.3%</td>
+                        <td>1 Days</td>
+                        <td class="">21.6%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">AMT</td>
+                        <td class="">0.0%</td>
+                        <td class="bias-up">52.1%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">56.9%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">ASTS</td>
+                        <td class="val-high">12.6%</td>
+                        <td class="">51.7%</td>
+                        <td>1 Days</td>
+                        <td class="">16.4%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">AVGO</td>
+                        <td class="">2.0%</td>
+                        <td class="bias-up">53.5%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">34.1%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">CLS</td>
+                        <td class="">3.0%</td>
+                        <td class="bias-up">57.3%</td>
+                        <td>1 Days</td>
+                        <td class="">21.8%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">DDD</td>
+                        <td class="">6.8%</td>
+                        <td class="bias-down">41.3%</td>
+                        <td>1 Days</td>
+                        <td class="">17.6%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">DNN</td>
+                        <td class="">2.2%</td>
+                        <td class="bias-down">46.7%</td>
+                        <td>1 Days</td>
+                        <td class="">24.8%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">GLXY</td>
+                        <td class="">7.4%</td>
+                        <td class="bias-up">52.4%</td>
+                        <td>1 Days</td>
+                        <td class="">11.2%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">GOOGL</td>
+                        <td class="">0.2%</td>
+                        <td class="bias-up">55.7%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">47.7%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">ISRG</td>
+                        <td class="">0.6%</td>
+                        <td class="">51.5%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">55.7%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">KTOS</td>
+                        <td class="">1.6%</td>
+                        <td class="bias-up">52.9%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">31.9%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">MU</td>
+                        <td class="">2.6%</td>
+                        <td class="bias-up">54.5%</td>
+                        <td>1 Days</td>
+                        <td class="">26.1%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">NFLX</td>
+                        <td class="">0.4%</td>
+                        <td class="">50.9%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">47.5%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">NVDA</td>
+                        <td class="">1.0%</td>
+                        <td class="bias-up">53.1%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">32.3%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">ONDS</td>
+                        <td class="val-high">16.6%</td>
+                        <td class="bias-down">47.5%</td>
+                        <td>1 Days</td>
+                        <td class="">11.4%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">PTRN</td>
+                        <td class="">9.9%</td>
+                        <td class="bias-down">44.6%</td>
+                        <td>1 Days</td>
+                        <td class="">23.8%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">RKLB</td>
+                        <td class="">6.6%</td>
+                        <td class="bias-up">52.9%</td>
+                        <td>1 Days</td>
+                        <td class="">19.4%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">RR</td>
+                        <td class="val-high">17.8%</td>
+                        <td class="bias-down">41.7%</td>
+                        <td>1 Days</td>
+                        <td class="">12.6%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">TER</td>
+                        <td class="">2.0%</td>
+                        <td class="bias-up">53.5%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">30.5%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">TSM</td>
+                        <td class="">0.4%</td>
+                        <td class="bias-up">53.5%</td>
+                        <td>1 Days</td>
+                        <td class="val-low">35.5%</td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-weight: 900; color: #fff;">UAMY</td>
+                        <td class="val-high">14.6%</td>
+                        <td class="bias-down">46.1%</td>
+                        <td>1 Days</td>
+                        <td class="">17.4%</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <h4 class="section-title">Individual reports</h4>
         <div class="row">
             
             <div class="col s12 m6 l4 xl3">
