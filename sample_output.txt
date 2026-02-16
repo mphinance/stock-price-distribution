@@ -1,0 +1,47 @@
+Analysis Report for GLXY
+========================================
+
+1. DAILY MOVE DISTRIBUTION ANALYSIS
+========================================
+Move Range                     Count      Probability
+--------------------------------------------------
+Extreme Drop (> -10%)          6          3.2%
+Large Drop (-5% to -10%)       19         10.2%
+Moderate Drop (-2.5% to -5%)   31         16.6%
+Normal Drop (-1% to -2.5%)     21         11.2%
+Quiet (< ±1%)                  21         11.2%
+Normal Rise (1% to 2.5%)       22         11.8%
+Moderate Rise (2.5% to 5%)     34         18.2%
+Large Rise (5% to 10%)         24         12.8%
+Extreme Rise (> 10%)           7          3.7%
+
+Insight:
+- Combined "Extreme" moves (>10% drop or rise) occur ~7% of the time.
+- "Quiet" days are relatively rare (~11%).
+
+========================================
+2. SWING DURATION METRICS
+========================================
+Directional Bias:
+Up Days: 98 (52.4%)
+Down Days: 89 (47.6%)
+
+Swing Duration (Consecutive Days):
+1-Day Trends: 61 counts (Most Common - Reversal likely)
+2-Day Trends: 19 counts
+3-Day Trends: 9 counts
+4-Day Trends: 5 counts
+5-Day Trends: 3 counts
+6+ Day Trends: 4 counts (Rare)
+
+Strategy Implication:
+- Probability of verifying extended trends diminishes significantly after Day 3.
+
+========================================
+3. BTC SIGNAL (GLXY/BTC RATIO)
+========================================
+Current GLXY/BTC Ratio: 0.000315
+Ratio Z-Score (20d): -0.38
+>>> SIGNAL: NEUTRAL
+
+(Buy Signal requires Z-Score < -2.0)

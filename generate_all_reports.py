@@ -1,0 +1,93 @@
+import subprocess
+import os
+
+WATCHLIST = [
+    "ACHR", "AMT", "ASTS", "AVGO", "CLS", 
+    "DDD", "DNN", "GLXY", "GOOGL", "ISRG", 
+    "KTOS", "MU", "NFLX", "NVDA", "ONDS", 
+    "PTRN", "RKLB", "RR", "TER", "TSM", "UAMY"
+]
+
+INDEX_TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Alpha Intelligence - Strategy Dashboard</title>
+    <style>
+        :root {
+            --ocean-deep: #022840;
+            --ocean-navy: #034C8C;
+            --ocean-mid: #03588C;
+            --ocean-light: #B0C4D9;
+            --ocean-neon: #04D88B;
+            --ocean-forest: #03734A;
+        }
+        body { background: radial-gradient(circle at top, var(--ocean-navy), var(--ocean-deep)); color: var(--ocean-light); font-family: 'Inter', sans-serif; min-height: 100vh; }
+        .header-panel { background-color: rgba(0,0,0,0.4); color: #fff; padding: 80px 0; margin-bottom: 60px; border-bottom: 1px solid rgba(176, 196, 217, 0.1); text-align: center; }
+        .header-panel h1 { font-weight: 900; margin: 0; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 30px rgba(4, 216, 139, 0.3); }
+        .header-panel p { font-size: 1.3rem; color: var(--ocean-neon); opacity: 0.9; margin-top: 15px; font-family: monospace; }
+        .card { background-color: rgba(3, 88, 140, 0.15); border: 1px solid rgba(176, 196, 217, 0.1); border-radius: 16px; backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--ocean-neon); background-color: rgba(3, 88, 140, 0.25); box-shadow: 0 15px 45px rgba(0,0,0,0.5); }
+        .card-title { color: #fff !important; font-weight: 800 !important; text-transform: uppercase; letter-spacing: 1px; }
+        .card-action { border-top: 1px solid rgba(176, 196, 217, 0.1) !important; background: transparent !important; }
+        .card-action a { color: var(--ocean-neon) !important; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .container { width: 95%; max-width: 1400px; }
+        .ticker-badge { background: linear-gradient(45deg, var(--ocean-neon), var(--ocean-forest)); color: #000; padding: 4px 12px; border-radius: 6px; font-weight: 900; font-size: 1rem; margin-bottom: 15px; display: inline-block; }
+        .footer { padding: 80px 0; text-align: center; color: rgba(176, 196, 217, 0.2); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="header-panel">
+        <div class="container">
+            <h1>ALPHA INTELLIGENCE</h1>
+            <p>> STRATEGY_DISTRIBUTION_DASHBOARD v1.2</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% for ticker in watchlist %}
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="ticker-badge">{{ ticker }}</div>
+                        <span class="card-title">Strategy Report</span>
+                        <p style="color: var(--ocean-light); font-size: 0.95rem; line-height: 1.6;">Tactical volatility distribution and swing duration metrics for {{ ticker }}.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ ticker }}_report.html">Initialize Analysis <i class="material-icons right">chevron_right</i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="footer">
+        POWERED BY ANTIGRAVITY | ALPHA-PLAYBOOKS SERIES
+    </div>
+</body>
+</html>
+"""
+
+def main():
+    print(f"Generating reports for: {', '.join(WATCHLIST)}")
+    for ticker in WATCHLIST:
+        print(f"Processing {ticker}...")
+        subprocess.run(["python3", "generate_strategy_report.py", ticker, "--html"], check=True)
+    
+    print("Generating landing page...")
+    from jinja2 import Template
+    template = Template(INDEX_TEMPLATE)
+    html_content = template.render(watchlist=WATCHLIST)
+    
+    with open("index.html", "w") as f:
+        f.write(html_content)
+    
+    print("Done! Open index.html to view the dashboard.")
+
+if __name__ == "__main__":
+    main()

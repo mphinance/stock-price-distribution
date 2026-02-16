@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Strategy Report - AAPL</title>
+    <style>
+        body { background-color: #f5f5f5; }
+        .card-title { font-weight: bold; color: #1565c0; }
+        .insight-box { background-color: #e3f2fd; padding: 15px; border-left: 5px solid #2196f3; margin-top: 10px; }
+        .header-panel { background-color: #1565c0; color: white; padding: 20px 0; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <div class="header-panel">
+        <div class="container">
+            <h3 class="center-align">Strategy Report: AAPL</h3>
+            <p class="center-align">Apple Inc. | Generated on 2026-02-16 14:20</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8 offset-m2">
+                <!-- Distribution Analysis -->
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">1. Daily Move Distribution Analysis</span>
+                        <table class="striped highlight">
+                            <thead>
+                                <tr>
+                                    <th>Move Range</th>
+                                    <th>Count</th>
+                                    <th>Probability</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <td>Extreme Drop (> -10%)</td>
+                                    <td>0</td>
+                                    <td>0.0%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Large Drop (-5% to -10%)</td>
+                                    <td>2</td>
+                                    <td>0.4%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Moderate Drop (-2.5% to -5%)</td>
+                                    <td>30</td>
+                                    <td>6.0%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Normal Drop (-1% to -2.5%)</td>
+                                    <td>61</td>
+                                    <td>12.2%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Quiet (< ±1%)</td>
+                                    <td>295</td>
+                                    <td>58.9%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Normal Rise (1% to 2.5%)</td>
+                                    <td>90</td>
+                                    <td>18.0%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Moderate Rise (2.5% to 5%)</td>
+                                    <td>18</td>
+                                    <td>3.6%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Large Rise (5% to 10%)</td>
+                                    <td>4</td>
+                                    <td>0.8%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Extreme Rise (> 10%)</td>
+                                    <td>1</td>
+                                    <td>0.2%</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                        <div class="insight-box">
+                            <strong>Insights:</strong><br>
+                            - Quiet Days: ~58% of the time. Don't force trades here.<br>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Swing Metrics -->
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">2. Swing Duration Metrics</span>
+                        <p><strong>Directional Bias:</strong></p>
+                        <ul>
+                            <li>Up Days: 274 (54.7%)</li>
+                            <li>Down Days: 227 (45.3%)</li>
+                        </ul>
+                        
+                        <p><strong>Swing Duration (Consecutive Days):</strong></p>
+                        <table class="striped">
+                            <thead>
+                                <tr>
+                                    <th>Duration</th>
+                                    <th>Frequency</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <td>1-Day</td>
+                                    <td>123</td>
+                                    <td><small>(Most Common - Reversal likely)</small></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>2-Day</td>
+                                    <td>48</td>
+                                    <td><small></small></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>3-Day</td>
+                                    <td>34</td>
+                                    <td><small></small></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>4-Day</td>
+                                    <td>14</td>
+                                    <td><small></small></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>5-Day</td>
+                                    <td>9</td>
+                                    <td><small></small></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>6+ Day</td>
+                                    <td>11</td>
+                                    <td><small>(Rare)</small></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                        <div class="insight-box">
+                            <strong>Strategy Implication:</strong><br>
+                            - Most common swing duration: 1 days.<br>- Probability of verifying extended trends diminishes significantly after Day 3.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Strategy Report - RKLB</title>
+    <style>
+        :root {
+            --ocean-deep: #022840;
+            --ocean-navy: #034C8C;
+            --ocean-mid: #03588C;
+            --ocean-light: #B0C4D9;
+            --ocean-neon: #04D88B;
+            --ocean-forest: #03734A;
+        }
+        body { background: radial-gradient(circle at top, var(--ocean-navy), var(--ocean-deep)); color: var(--ocean-light); font-family: 'Inter', sans-serif; min-height: 100vh; }
+        .card { background: rgba(3, 88, 140, 0.15); border: 1px solid rgba(176, 196, 217, 0.2); border-radius: 16px; backdrop-filter: blur(12px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+        .card-content { color: var(--ocean-light) !important; }
+        .card-title { font-weight: 800 !important; color: var(--ocean-neon) !important; text-transform: uppercase; letter-spacing: 2px; border-bottom: 3px solid var(--ocean-forest); padding-bottom: 15px; display: block; margin-bottom: 25px !important; }
+        .insight-box { background: rgba(4, 216, 139, 0.05); padding: 20px; border-radius: 8px; border-left: 6px solid var(--ocean-neon); margin-top: 30px; color: #fff; font-size: 1.05rem; }
+        .header-panel { background: rgba(0,0,0,0.3); padding: 50px 0; margin-bottom: 40px; border-bottom: 1px solid rgba(176, 196, 217, 0.1); }
+        .header-panel h3 { font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(4, 216, 139, 0.4); }
+        .header-panel p { color: var(--ocean-neon); font-family: monospace; font-size: 1.1rem; }
+        .chart-container { position: relative; height:380px; width:100%; margin-top: 20px; background: rgba(0,0,0,0.4); border-radius: 12px; padding: 15px; border: 1px solid rgba(176, 196, 217, 0.05); }
+        table { border-collapse: separate; border-spacing: 0 8px; }
+        table.striped > tbody > tr:nth-child(odd) { background-color: rgba(176, 196, 217, 0.05); }
+        table.striped > tbody > tr { border: none; transition: background 0.3s; }
+        table.striped > tbody > tr:hover { background: rgba(4, 216, 139, 0.1); }
+        thead { color: var(--ocean-neon); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .footer { padding: 60px 20px; text-align: center; color: rgba(176, 196, 217, 0.3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 4px; }
+        .bias-box-up { background: rgba(4, 216, 139, 0.15); border: 1px solid var(--ocean-neon); }
+        .bias-box-down { background: rgba(253, 70, 0, 0.1); border: 1px solid #fd4600; }
+        .bias-label { font-size: 0.75rem; color: var(--ocean-light); opacity: 0.6; font-weight: bold; }
+        .bias-val { font-size: 1.6rem; font-weight: 900; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="header-panel">
+        <div class="container">
+            <h3 class="center-align" style="margin:0;">STRATEGY REPORT: RKLB</h3>
+            <p class="center-align" style="margin-top: 15px;">// Rocket Lab Corporation | 2026-02-16 14:34</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <!-- Distribution Analysis -->
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Volatility Distribution</span>
+                        <div class="chart-container">
+                            <canvas id="moveChart"></canvas>
+                        </div>
+                        <table class="striped" style="margin-top: 40px;">
+                            <thead>
+                                <tr>
+                                    <th>Market Move</th>
+                                    <th class="right-align">Count</th>
+                                    <th class="right-align">Probability</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Extreme Drop (> -10%)</td>
+                                    <td class="right-align">8</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">1.6%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Large Drop (-5% to -10%)</td>
+                                    <td class="right-align">43</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">8.6%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Moderate Drop (-2.5% to -5%)</td>
+                                    <td class="right-align">72</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">14.4%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Normal Drop (-1% to -2.5%)</td>
+                                    <td class="right-align">63</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">12.6%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Quiet (< ±1%)</td>
+                                    <td class="right-align">97</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">19.4%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Normal Rise (1% to 2.5%)</td>
+                                    <td class="right-align">73</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">14.6%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Moderate Rise (2.5% to 5%)</td>
+                                    <td class="right-align">65</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">13.0%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Large Rise (5% to 10%)</td>
+                                    <td class="right-align">55</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">11.0%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="color: #fff;">Extreme Rise (> 10%)</td>
+                                    <td class="right-align">25</td>
+                                    <td class="right-align" style="color: var(--ocean-neon); font-weight: 800;">5.0%</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                        <div class="insight-box">
+                            <strong><i class="material-icons left" style="color: var(--ocean-neon)">analytics</i>DISTRIBUTION INSIGHTS</strong><br><br>
+                            - Combined "Extreme" moves (>10% drop or rise) occur ~6.6% of the time.<br>- "Quiet" days are relatively rare (~19.4%).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Swing Metrics -->
+                <div class="card" style="margin-top: 40px;">
+                    <div class="card-content">
+                        <span class="card-title">Streak Analysis</span>
+                        
+                        <div class="row">
+                            <div class="col s12 l5">
+                                <p style="margin-bottom: 20px; font-weight: bold; color: var(--ocean-mid);">DIRECTIONAL BIAS [2Y]</p>
+                                <div style="display: flex; gap: 15px; margin-bottom: 30px;">
+                                    <div class="bias-box-up" style="flex: 1; padding: 15px; border-radius: 12px;">
+                                        <div class="bias-label">UP DAYS</div>
+                                        <div class="bias-val">52.9%</div>
+                                    </div>
+                                    <div class="bias-box-down" style="flex: 1; padding: 15px; border-radius: 12px;">
+                                        <div class="bias-label">DOWN DAYS</div>
+                                        <div class="bias-val">47.1%</div>
+                                    </div>
+                                </div>
+                                <table class="striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Streak</th>
+                                            <th class="right-align">Frequency</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <td style="color: #fff;">1-Day</td>
+                                            <td class="right-align">127</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="color: #fff;">2-Day</td>
+                                            <td class="right-align">64</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="color: #fff;">3-Day</td>
+                                            <td class="right-align">34</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="color: #fff;">4-Day</td>
+                                            <td class="right-align">12</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="color: #fff;">5-Day</td>
+                                            <td class="right-align">9</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td style="color: #fff;">6+ Day</td>
+                                            <td class="right-align">7</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col s12 l7">
+                                <div class="chart-container">
+                                    <canvas id="swingChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="insight-box" style="border-left-color: #fd4600;">
+                            <strong><i class="material-icons left" style="color: #fd4600">bolt</i>TACTICAL IMPLICATION</strong><br><br>
+                            - Most common swing duration: 1 days.<br>- Probability of verifying extended trends diminishes significantly after Day 3.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        ALPHA-PLAYBOOKS REPORTING ENGINE // STOCK-PRICE-DISTRIBUTION v1.2
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        const oceanNeon = '#04D88B';
+        const oceanLight = '#B0C4D9';
+        const oceanMid = '#03588C';
+        const oceanForest = '#03734A';
+        const deepBlue = '#022840';
+
+        // Move Distribution Chart
+        const moveCtx = document.getElementById('moveChart').getContext('2d');
+        new Chart(moveCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Extreme Drop (> -10%)', 'Large Drop (-5% to -10%)', 'Moderate Drop (-2.5% to -5%)', 'Normal Drop (-1% to -2.5%)', 'Quiet (< ±1%)', 'Normal Rise (1% to 2.5%)', 'Moderate Rise (2.5% to 5%)', 'Large Rise (5% to 10%)', 'Extreme Rise (> 10%)'],
+                datasets: [{
+                    label: 'Day Count',
+                    data: [8, 43, 72, 63, 97, 73, 65, 55, 25],
+                    backgroundColor: (context) => {
+                        const index = context.dataIndex;
+                        return (index < 2 || index > 6) ? '#fd4600' : oceanNeon;
+                    },
+                    borderRadius: 6,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(176, 196, 217, 0.1)' }, ticks: { color: oceanLight } },
+                    x: { grid: { display: false }, ticks: { color: oceanLight } }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'DAILY VOLATILITY FREQUENCY', color: '#fff', font: { size: 16, weight: 'bold' } }
+                }
+            }
+        });
+
+        // Swing Duration Chart
+        const swingCtx = document.getElementById('swingChart').getContext('2d');
+        new Chart(swingCtx, {
+            type: 'bar',
+            data: {
+                labels: ['1-Day', '2-Day', '3-Day', '4-Day', '5-Day', '6+ Day'],
+                datasets: [{
+                    label: 'Frequency',
+                    data: [127, 64, 34, 12, 9, 7],
+                    backgroundColor: oceanMid,
+                    borderColor: oceanNeon,
+                    borderWidth: 2,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { beginAtZero: true, grid: { color: 'rgba(176, 196, 217, 0.1)' }, ticks: { color: oceanLight } },
+                    y: { grid: { display: false }, ticks: { color: oceanLight } }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'CONSECUTIVE STREAKS', color: '#fff', font: { size: 16, weight: 'bold' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

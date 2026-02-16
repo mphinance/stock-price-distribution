@@ -1,0 +1,42 @@
+# Strategy Report: KTOS
+**Company**: Kratos Defense & Security Solutions, Inc.  
+**Generated**: 2026-02-16 14:28:12  
+
+## 1. Daily Move Distribution Analysis
+
+| Move Range | Count | Probability |
+| --- | --- | --- |
+| Extreme Drop (> -10%) | 2 | 0.4% |
+| Large Drop (-5% to -10%) | 22 | 4.4% |
+| Moderate Drop (-2.5% to -5%) | 54 | 10.8% |
+| Normal Drop (-1% to -2.5%) | 76 | 15.2% |
+| Quiet (< ±1%) | 160 | 31.9% |
+| Normal Rise (1% to 2.5%) | 86 | 17.2% |
+| Moderate Rise (2.5% to 5%) | 62 | 12.4% |
+| Large Rise (5% to 10%) | 33 | 6.6% |
+| Extreme Rise (> 10%) | 6 | 1.2% |
+
+### Insights
+- Quiet Days: ~31% of the time. Don't force trades here.
+
+
+## 2. Swing Duration Metrics
+
+### Directional Bias
+- Up Days: 265 (52.9%)
+- Down Days: 236 (47.1%)
+
+### Swing Duration (Consecutive Days)
+
+| Duration | Frequency | Note |
+| --- | --- | --- |
+| 1-Day | 132 | (Most Common - Reversal likely) |
+| 2-Day | 69 |  |
+| 3-Day | 24 |  |
+| 4-Day | 15 |  |
+| 5-Day | 7 |  |
+| 6+ Day | 9 | (Rare) |
+
+### Strategy Implication
+- Most common swing duration: 1 days.
+- Probability of verifying extended trends diminishes significantly after Day 3.
