@@ -407,6 +407,7 @@ def main():
     parser.add_argument('ticker', type=str, help='Stock Ticker Symbol')
     parser.add_argument('--markdown', '-m', action='store_true', help='Generate Markdown report file')
     parser.add_argument('--html', '-w', action='store_true', help='Generate HTML report file')
+    parser.add_argument('--output-dir', '-o', type=str, default='.', help='Directory to save output files')
     args = parser.parse_args()
     
     ticker = args.ticker.upper()
@@ -414,6 +415,10 @@ def main():
     df, dist_data, insight_text = analyze_daily_moves(df)
     bias, swing_data, implication = analyze_swing_duration(df)
     
+    # Ensure output directory exists
+    if args.output_dir != '.' and not os.path.exists(args.output_dir):
+        os.makedirs(args.output_dir)
+
     # Text Report (Always generated or printed if no flags)
     text_report = generate_text_report(ticker, info, dist_data, insight_text, bias, swing_data, implication)
     
@@ -426,9 +431,10 @@ def main():
     if args.markdown:
         markdown_content = generate_markdown(ticker, info, dist_data, insight_text, bias, swing_data, implication)
         md_filename = f"{ticker}_report.md"
-        with open(md_filename, "w") as f:
+        output_path = os.path.join(args.output_dir, md_filename)
+        with open(output_path, "w") as f:
             f.write(markdown_content)
-        print(f"Markdown report saved to {md_filename}")
+        print(f"Markdown report saved to {output_path}")
     
     # HTML Generation
     if args.html:
@@ -453,9 +459,10 @@ def main():
             swing_counts=swing_counts
         )
         html_filename = f"{ticker}_report.html"
-        with open(html_filename, "w") as f:
+        output_path = os.path.join(args.output_dir, html_filename)
+        with open(output_path, "w") as f:
             f.write(html_content)
-        print(f"HTML report saved to {html_filename}")
+        print(f"HTML report saved to {output_path}")
 
 if __name__ == "__main__":
     main()

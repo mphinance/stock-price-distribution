@@ -75,19 +75,24 @@ INDEX_TEMPLATE = """
 
 def main():
     print(f"Generating reports for: {', '.join(WATCHLIST)}")
+    output_dir = "docs"
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
     for ticker in WATCHLIST:
         print(f"Processing {ticker}...")
-        subprocess.run(["python3", "generate_strategy_report.py", ticker, "--html"], check=True)
+        subprocess.run(["python3", "generate_strategy_report.py", ticker, "--html", "--output-dir", output_dir], check=True)
     
     print("Generating landing page...")
     from jinja2 import Template
     template = Template(INDEX_TEMPLATE)
     html_content = template.render(watchlist=WATCHLIST)
     
-    with open("index.html", "w") as f:
+    index_path = os.path.join(output_dir, "index.html")
+    with open(index_path, "w") as f:
         f.write(html_content)
     
-    print("Done! Open index.html to view the dashboard.")
+    print(f"Done! Open {index_path} to view the dashboard.")
 
 if __name__ == "__main__":
     main()
